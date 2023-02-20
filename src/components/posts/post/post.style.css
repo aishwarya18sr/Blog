@@ -1,0 +1,77 @@
+.post{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    height: 60vh;
+    width: 45vh;
+    background-color: #fff;
+    /* margin: 10px; */
+    border: 1px solid #000000;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 10vh;
+}
+
+.post-padding{
+    box-sizing: border-box;
+    padding-left: 3vh;
+    padding-right: 3vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.post-image{
+    margin: 0;
+    height: 40vh;
+    width: 100%;
+    background-color: #000000;
+}
+
+.post-image > img{
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.post-meta{
+    display: flex;
+    height: 3vh;
+    flex-direction: row;
+    justify-content: space-between;
+    /* padding: 10px; */
+}
+
+.post-title{
+    height: 5vh;
+    font-size: large;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 1vh;
+}
+
+.post-description{
+    height: 9vh;
+    text-align: left;
+    color: #000000;
+}
+
+.post-engagements{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 4vh;
+    /* padding: 10px; */
+}
+
+.post-engagements img{
+    height: 3vh;
+    width: 3vh;
+    margin: 0;
+}
+
+.clap{
+    display: flex;
+    flex-direction: row;
+}

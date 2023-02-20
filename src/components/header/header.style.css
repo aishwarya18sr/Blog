@@ -1,0 +1,30 @@
+.header {
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: white;
+}
+
+.company-title{
+    padding-top: 3vh;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.blog-name{
+    font-size: medium;
+    font-style: italic;
+}
+
+.nav-bar{
+    width: 100%;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
