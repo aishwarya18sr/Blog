@@ -5,7 +5,7 @@ import heartRed from "../../assets/icons/heart-red.svg";
 import { UPDATE_BLOG_DATA } from "../../constants/apiEndPoints";
 import { BlogData } from "../../types";
 import { getFormattedDateFromUtcDate } from "../../utils/common";
-import makeRequest from "../../utils/makeReuqest";
+import makeRequest from "../../utils/makeRequest";
 import "./blogPostCard.css";
 
 interface BlogPostCardProp {
@@ -29,7 +29,7 @@ const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
 
   const handleLike = async () => {
     try {
-      await makeRequest(UPDATE_BLOG_DATA(blogData?.id), {
+      await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
         data: { liked: !isLiked },
       });
       setIsLiked(!isLiked);

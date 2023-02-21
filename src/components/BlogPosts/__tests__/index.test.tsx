@@ -1,9 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { mockBlogPostData } from "../../../mocks/blogPosts";
 import BlogPosts from "..";
 
-jest.mock("../../../utils/makeReuqest/", () => () => {
+jest.mock("../../../utils/makeRequest/", () => () => {
   return Promise.resolve(mockBlogPostData);
 });
 

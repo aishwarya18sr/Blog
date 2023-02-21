@@ -6,7 +6,8 @@ const makeRequest = async (
   dynamicConfig = {}
 ) => {
   const requestDetails = {
-    url: `${BACKEND_URL}${apiEndPoint.url}`,
+    baseURL: BACKEND_URL,
+    url: apiEndPoint.url,
     method: apiEndPoint.method,
     ...dynamicConfig,
   };

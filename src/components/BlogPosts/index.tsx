@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GET_BLOG_DATA } from "../../constants/apiEndPoints";
 import { BlogData } from "../../types";
-import makeRequest from "../../utils/makeReuqest";
+import makeRequest from "../../utils/makeRequest";
 import BlogPostCard from "../BlogPostCard";
 import "./blogPosts.css";
 
@@ -28,7 +28,7 @@ const BlogPosts = () => {
   }
   return blogData ? (
     <div className="posts basic-padding">
-      {blogData?.map((eachBlogData) => {
+      {blogData.map((eachBlogData) => {
         return <BlogPostCard key={eachBlogData.id} blogData={eachBlogData} />;
       })}
     </div>
