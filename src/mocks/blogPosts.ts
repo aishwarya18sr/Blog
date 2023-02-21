@@ -22,3 +22,10 @@ export const mockBlogPostData: BlogData[] = [
     image: "abstract.png",
   },
 ];
+
+export const mockClapsData = {
+  data: {
+    claps: 10,
+    liked: false,
+  },
+};

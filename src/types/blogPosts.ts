@@ -8,3 +8,10 @@ export interface BlogData {
   claps: number;
   liked: boolean;
 }
+
+export interface ClapsData {
+  data: {
+    claps: 10;
+    liked: false;
+  };
+}
