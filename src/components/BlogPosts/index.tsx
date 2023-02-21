@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import posts from "../../assets/index.json";
 import { GET_BLOG_DATA } from "../../constants/apiEndPoints";
 import { BlogData } from "../../types";
 import makeRequest from "../../utils/makeReuqest";
@@ -18,7 +17,6 @@ const BlogPosts = () => {
       .catch((e) => {
         setError(e.message);
       });
-    setBlogData(posts);
   }, []);
 
   if (error) {

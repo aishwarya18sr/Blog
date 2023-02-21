@@ -30,7 +30,7 @@ const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
   const handleLike = async () => {
     try {
       await makeRequest(UPDATE_BLOG_DATA(blogData?.id), {
-        data: { isLiked: isLiked },
+        data: { liked: !isLiked },
       });
       setIsLiked(!isLiked);
     } catch (e) {
