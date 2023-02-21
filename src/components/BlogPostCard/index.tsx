@@ -13,7 +13,6 @@ interface BlogPostCardProp {
 }
 
 const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
-  const image = require(`../../assets/images/${blogData.image}`);
   const [clapCount, setClapCount] = useState(blogData.claps);
   const [isLiked, setIsLiked] = useState(blogData.liked);
 
@@ -42,7 +41,7 @@ const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
   return (
     <div className="post">
       <div className="post-image">
-        <img src={image} alt="" />
+        <img src={blogData.image} alt="" />
       </div>
       <div className="post-content post-padding">
         <div className="post-meta">
