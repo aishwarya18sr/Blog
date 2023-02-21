@@ -3,7 +3,7 @@ import posts from "../../assets/index.json";
 import { GET_BLOG_DATA } from "../../constants/apiEndPoints";
 import { BlogData } from "../../types";
 import makeRequest from "../../utils/makeReuqest";
-import PostCard from "../BlogPostCard";
+import BlogPostCard from "../BlogPostCard";
 import "./blogPosts.css";
 
 const BlogPosts = () => {
@@ -31,12 +31,7 @@ const BlogPosts = () => {
   return blogData ? (
     <div className="posts basic-padding">
       {blogData?.map((eachBlogData) => {
-        return (
-          <PostCard
-            key={eachBlogData?.id ?? eachBlogData?.title}
-            blogData={eachBlogData}
-          />
-        );
+        return <BlogPostCard key={eachBlogData.id} blogData={eachBlogData} />;
       })}
     </div>
   ) : (
