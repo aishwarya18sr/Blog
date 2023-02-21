@@ -1,28 +1,42 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { useState } from "react";
 import clap from "../../assets/icons/clapping.svg";
 import heartBlack from "../../assets/icons/heart-black.svg";
 import heartRed from "../../assets/icons/heart-red.svg";
-import { UPDATE_CLAP, UPDATE_LIKE } from "../../constants/apiEndPoints";
+import { UPDATE_BLOG_DATA } from "../../constants/apiEndPoints";
 import { BlogData } from "../../types";
+import { getFormattedDateFromUtcDate } from "../../utils/common";
 import makeRequest from "../../utils/makeReuqest";
-import "./postCard.css";
+import "./blogPostCard.css";
 
-interface PostCardProp {
+interface BlogPostCardProp {
   blogData: BlogData;
-  setIsRefreshData: Dispatch<SetStateAction<boolean>>;
 }
 
-const PostCard: React.FC<PostCardProp> = ({ blogData, setIsRefreshData }) => {
+const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
   const image = require(`../../assets/images/${blogData.image}`);
+  const [clapCount, setClapCount] = useState(blogData.claps);
+  const [isLiked, setIsLiked] = useState(blogData.liked);
 
   const handleClap = async () => {
-    // await makeRequest(UPDATE_CLAP(blogData?.id ?? 0));
-    setIsRefreshData(true);
+    try {
+      await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
+        data: { claps: clapCount + 1 },
+      });
+      setClapCount(clapCount + 1);
+    } catch (e) {
+      //TODO: Handle error
+    }
   };
 
   const handleLike = async () => {
-    // await makeRequest(UPDATE_LIKE(blogData?.id ?? 0));
-    setIsRefreshData(true);
+    try {
+      await makeRequest(UPDATE_BLOG_DATA(blogData?.id), {
+        data: { isLiked: isLiked },
+      });
+      setIsLiked(!isLiked);
+    } catch (e) {
+      //TODO: Handle error
+    }
   };
 
   return (
@@ -32,7 +46,9 @@ const PostCard: React.FC<PostCardProp> = ({ blogData, setIsRefreshData }) => {
       </div>
       <div className="post-content post-padding">
         <div className="post-meta">
-          <div className="post-date">{blogData.date}</div>
+          <div className="post-date">
+            {getFormattedDateFromUtcDate(blogData.date)}
+          </div>
           <div className="post-reading-time">{blogData.readingTime}</div>
         </div>
         <div className="post-title">{blogData.title}</div>
@@ -43,14 +59,14 @@ const PostCard: React.FC<PostCardProp> = ({ blogData, setIsRefreshData }) => {
           <div className="clap-icon">
             <img src={clap} alt="clap" />
           </div>
-          <div className="clap-counter">{blogData.claps}</div>
+          <div className="clap-counter">{clapCount}</div>
         </div>
         <div className="like" onClick={handleLike}>
-          <img src={blogData.liked ? heartRed : heartBlack} alt="heart" />
+          <img src={isLiked ? heartRed : heartBlack} alt="heart" />
         </div>
       </div>
     </div>
   );
 };
 
-export default PostCard;
+export default BlogPostCard;

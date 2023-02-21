@@ -48,12 +48,14 @@
     font-weight: bold;
     color: #000000;
     margin-bottom: 1vh;
+    text-overflow: ellipsis;
 }
 
 .post-description{
     height: 9vh;
     text-align: left;
     color: #000000;
+    text-overflow: ellipsis;
 }
 
 .post-engagements{

@@ -1,9 +1,9 @@
-import './footer.style.css';
+import "./footer.css";
 
 const Footer = () => (
-    <footer className="basic-padding">
-        <p>© {new Date().getFullYear()}, Built with React</p>
-    </footer>
+  <footer className="basic-padding">
+    <p>© {new Date().getFullYear()}, Built with React</p>
+  </footer>
 );
 
 export default Footer;

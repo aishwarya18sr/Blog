@@ -1,5 +1,5 @@
 export interface BlogData {
-  id?: number;
+  id: number;
   image: string;
   date: string;
   readingTime: string;

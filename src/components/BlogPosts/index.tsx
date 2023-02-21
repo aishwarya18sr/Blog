@@ -3,24 +3,24 @@ import posts from "../../assets/index.json";
 import { GET_BLOG_DATA } from "../../constants/apiEndPoints";
 import { BlogData } from "../../types";
 import makeRequest from "../../utils/makeReuqest";
-import PostCard from "../postCard";
-import "./posts.css";
+import PostCard from "../BlogPostCard";
+import "./blogPosts.css";
 
-const Posts = () => {
+const BlogPosts = () => {
   const [blogData, setBlogData] = useState<BlogData[]>();
-  const [isRefreshData, setIsRefreshData] = useState(false);
   const [error, setError] = useState();
 
   useEffect(() => {
-    // makeRequest(GET_BLOG_DATA)
-    //   .then((response) => {
-    //     setBlogData(response);
-    //   })
-    //   .catch((e) => {
-    //     setError(e.message);
-    //   });
+    makeRequest(GET_BLOG_DATA)
+      .then((response) => {
+        setBlogData(response);
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
     setBlogData(posts);
-  }, [isRefreshData]);
+  }, []);
+
   if (error) {
     return (
       <div className="blogDataError">
@@ -35,7 +35,6 @@ const Posts = () => {
           <PostCard
             key={eachBlogData?.id ?? eachBlogData?.title}
             blogData={eachBlogData}
-            setIsRefreshData={setIsRefreshData}
           />
         );
       })}
@@ -47,4 +46,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default BlogPosts;
