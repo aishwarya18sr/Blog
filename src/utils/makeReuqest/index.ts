@@ -6,8 +6,8 @@ const makeRequest = async (
   dynamicConfig = {}
 ) => {
   const requestDetails = {
-    ...apiEndPoint,
     url: `${BACKEND_URLS}${apiEndPoint.url}`,
+    method: apiEndPoint.method,
     ...dynamicConfig,
   };
   const { data } = await axios(requestDetails);

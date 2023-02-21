@@ -5,3 +5,21 @@
     justify-content: space-between;
     margin-top: 10vh;
 }
+
+.blogDataError {
+    height: 77vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+}
+
+.blogDataLoader {
+    height: 77vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+}
