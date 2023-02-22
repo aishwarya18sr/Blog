@@ -6,6 +6,7 @@ import axios from "axios";
 import { mockBlogPostData } from "../../../mocks/blogPosts";
 import makeRequest from "..";
 import { GET_BLOG_DATA } from "../../../constants/apiEndPoints";
+import { ERROR_ROUTE } from "../../../constants/routes";
 
 jest.mock("axios");
 
@@ -45,20 +46,32 @@ describe("makeRequest", () => {
     });
     expect(response).toEqual({ claps: 1 });
   });
-  it("should navigate to error route when API call returns error without status code", async () => {
+  it("should navigate to error page with status code when API call returns error status code", async () => {
     const mockNavigate = jest.fn();
-    mockedAxios.mockRejectedValueOnce({ message: "Error!" });
-    await makeRequest(GET_BLOG_DATA, {}, mockNavigate);
+    mockedAxios.mockRejectedValueOnce({ response: { status: 500 } });
+    expect(mockNavigate).not.toBeCalled();
+    await makeRequest(
+      UPDATE_BLOG_DATA(1),
+      {
+        data: { claps: 1 },
+      },
+      mockNavigate
+    );
     expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith("/error");
+    expect(mockNavigate).toHaveBeenCalledWith(`${ERROR_ROUTE}/500`);
   });
-  it("should navigate to error route with response status code when API call returns error with status code", async () => {
+  it("should navigate to error page without status code when API call returns error without status code", async () => {
     const mockNavigate = jest.fn();
-    mockedAxios.mockRejectedValueOnce({
-      response: { status: 500 },
-    });
-    await makeRequest(GET_BLOG_DATA, {}, mockNavigate);
+    mockedAxios.mockRejectedValueOnce({});
+    expect(mockNavigate).not.toBeCalled();
+    await makeRequest(
+      UPDATE_BLOG_DATA(1),
+      {
+        data: { claps: 1 },
+      },
+      mockNavigate
+    );
     expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith("/error/500");
+    expect(mockNavigate).toHaveBeenCalledWith(ERROR_ROUTE);
   });
 });
