@@ -1,3 +1,4 @@
+import { BlogData } from "./../../types/blogPosts";
 import { monthNames } from "../../constants/postCard";
 
 export const getSuffixOfDay = (dayNumber: number) => {
@@ -19,4 +20,13 @@ export const getFormattedDateFromUtcDate = (utcDate: string) => {
   return `${date.getDate()}${getSuffixOfDay(date.getDate())}
       ${monthNames[date.getMonth()]}, 
       ${date.getFullYear()}`;
+};
+
+export const getBlogIndexById = (
+  allBlogData: BlogData[],
+  selectedBlogDataId: number
+) => {
+  return allBlogData.findIndex(
+    (eachBlogData) => eachBlogData.id === selectedBlogDataId
+  );
 };
