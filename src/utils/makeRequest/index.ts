@@ -19,7 +19,11 @@ const makeRequest = async (
     return data;
   } catch (e: any) {
     if (navigate) {
-      navigate(`${ERROR_ROUTE}/${e?.name}`);
+      if (e?.response?.data?.statusCode) {
+        navigate(`${ERROR_ROUTE}/${e.response.data.statusCode}`);
+      } else {
+        navigate(ERROR_ROUTE);
+      }
     }
   }
 };

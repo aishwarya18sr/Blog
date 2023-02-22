@@ -8,26 +8,15 @@ import "./blogPosts.css";
 
 const BlogPosts = () => {
   const [blogData, setBlogData] = useState<BlogData[]>();
-  const [error, setError] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
-    makeRequest(GET_BLOG_DATA, {}, navigate)
-      .then((response) => {
-        setBlogData(response);
-      })
-      .catch((e) => {
-        setError(e.message);
-      });
-  }, [navigate]);
+    makeRequest(GET_BLOG_DATA, {}, navigate).then((response) => {
+      setBlogData(response);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  if (error) {
-    return (
-      <div className="blogDataError">
-        <p>{error}</p>
-      </div>
-    );
-  }
   return blogData ? (
     <div className="posts basic-padding">
       {blogData.map((eachBlogData) => {

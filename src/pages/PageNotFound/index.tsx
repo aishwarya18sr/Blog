@@ -2,7 +2,7 @@ import React from "react";
 import { Footer, Header } from "../../components";
 import "./pageNotFound.css";
 
-const Home: React.FC = () => {
+const PageNotFound: React.FC = () => {
   return (
     <div>
       <Header />
@@ -14,4 +14,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default PageNotFound;

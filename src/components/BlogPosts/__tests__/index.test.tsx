@@ -6,6 +6,10 @@ import makeRequest from "../../../utils/makeRequest";
 
 jest.mock("../../../utils/makeRequest/");
 
+jest.mock("react-router-dom", () => ({
+  useNavigate: () => jest.fn(),
+}));
+
 describe("BlogPosts", () => {
   const mockedMakeRequest = makeRequest as jest.MockedFunction<
     typeof makeRequest
@@ -15,17 +19,12 @@ describe("BlogPosts", () => {
   });
   it("should render correctly", async () => {
     mockedMakeRequest.mockResolvedValueOnce(mockBlogPostData);
+    expect(mockedMakeRequest).not.toHaveBeenCalled();
     const { asFragment } = render(<BlogPosts />);
     await waitFor(() => {
       expect(screen.getByText("mock title 1")).toBeTruthy();
     });
     expect(asFragment()).toMatchSnapshot();
-  });
-  it("should show error message when GET /blog-data API returns error", async () => {
-    mockedMakeRequest.mockRejectedValueOnce({ message: "Error!" });
-    render(<BlogPosts />);
-    await waitFor(() => {
-      expect(screen.getByText("Error!")).toBeTruthy();
-    });
+    expect(mockedMakeRequest).toBeCalledTimes(1);
   });
 });
