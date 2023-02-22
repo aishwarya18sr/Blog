@@ -19,8 +19,9 @@ const makeRequest = async (
     return data;
   } catch (e: any) {
     if (navigate) {
-      if (e?.response?.data?.statusCode) {
-        navigate(`${ERROR_ROUTE}/${e.response.data.statusCode}`);
+      const errorStatus = e.response?.status;
+      if (errorStatus) {
+        navigate(`${ERROR_ROUTE}/${errorStatus}`);
       } else {
         navigate(ERROR_ROUTE);
       }

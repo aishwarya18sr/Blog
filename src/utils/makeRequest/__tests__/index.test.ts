@@ -6,7 +6,6 @@ import axios from "axios";
 import { mockBlogPostData } from "../../../mocks/blogPosts";
 import makeRequest from "..";
 import { GET_BLOG_DATA } from "../../../constants/apiEndPoints";
-import { ERROR_ROUTE } from "../../../constants/routes";
 
 jest.mock("axios");
 
@@ -51,15 +50,15 @@ describe("makeRequest", () => {
     mockedAxios.mockRejectedValueOnce({ message: "Error!" });
     await makeRequest(GET_BLOG_DATA, {}, mockNavigate);
     expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(ERROR_ROUTE);
+    expect(mockNavigate).toHaveBeenCalledWith("/error");
   });
   it("should navigate to error route with response status code when API call returns error with status code", async () => {
     const mockNavigate = jest.fn();
     mockedAxios.mockRejectedValueOnce({
-      response: { data: { statusCode: 500 } },
+      response: { status: 500 },
     });
     await makeRequest(GET_BLOG_DATA, {}, mockNavigate);
     expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(`${ERROR_ROUTE}/500`);
+    expect(mockNavigate).toHaveBeenCalledWith("/error/500");
   });
 });
