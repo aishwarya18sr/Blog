@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import clap from "../../assets/icons/clapping.svg";
 import heartBlack from "../../assets/icons/heart-black.svg";
 import heartRed from "../../assets/icons/heart-red.svg";
-import { UPDATE_BLOG_DATA } from "../../constants/apiEndPoints";
 import { BlogData } from "../../types";
 import { getFormattedDateFromUtcDate } from "../../utils/common";
-import makeRequest from "../../utils/makeRequest";
 import "./blogPostCard.css";
 
 interface BlogPostCardProp {
@@ -16,32 +14,20 @@ const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
   const [clapCount, setClapCount] = useState(blogData.claps);
   const [isLiked, setIsLiked] = useState(blogData.liked);
 
-  const handleClap = async () => {
-    try {
-      await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
-        data: { claps: clapCount + 1 },
-      });
-      setClapCount(clapCount + 1);
-    } catch (e) {
-      //TODO: Handle error
-    }
+  const handleClap = () => {
+    setClapCount(clapCount + 1);
   };
 
-  const handleLike = async () => {
-    try {
-      await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
-        data: { liked: !isLiked },
-      });
-      setIsLiked(!isLiked);
-    } catch (e) {
-      //TODO: Handle error
-    }
+  const handleLike = () => {
+    setIsLiked(!isLiked);
   };
+
+  const imagePath = require(`../../assets/images/${blogData.image}`);
 
   return (
     <div className="post">
       <div className="post-image">
-        <img src={blogData.image} alt="" />
+        <img src={imagePath} alt="" />
       </div>
       <div className="post-content post-padding">
         <div className="post-meta">
