@@ -1,48 +1,58 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import clap from "../../assets/icons/clapping.svg";
 import heartBlack from "../../assets/icons/heart-black.svg";
 import heartRed from "../../assets/icons/heart-red.svg";
 import { UPDATE_BLOG_DATA } from "../../constants/apiEndPoints";
+import { useBlogPost } from "../../context/BlogPostContext";
 import { BlogData } from "../../types";
 import {
-  getBlogIndexById,
   getFormattedDateFromUtcDate,
+  updateAllBlogData,
 } from "../../utils/common";
 import makeRequest from "../../utils/makeRequest";
 import "./blogPostCard.css";
 
 interface BlogPostCardProp {
   blogData: BlogData;
-  setAllBlogData: (updatedBlogData: BlogData) => void;
 }
 
-const BlogPostCard: React.FC<BlogPostCardProp> = ({
-  blogData,
-  setAllBlogData,
-}) => {
+const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
+  const { allBlogData, setAllBlogData } = useBlogPost();
+
   const handleClap = async () => {
     try {
       await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
         data: { claps: blogData.claps + 1 },
       });
-      setAllBlogData({
-        ...blogData,
-        claps: blogData.claps + 1,
-      });
+      updateAllBlogData(
+        {
+          ...blogData,
+          claps: blogData.claps + 1,
+        },
+        allBlogData,
+        setAllBlogData
+      );
     } catch (e) {
       //TODO: Handle error
     }
   };
 
   const handleLike = async () => {
-    // try {
-    //   await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
-    //     data: { liked: !isLiked },
-    //   });
-    //   setIsLiked(!isLiked);
-    // } catch (e) {
-    //   //TODO: Handle error
-    // }
+    try {
+      await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
+        data: { liked: !blogData.liked },
+      });
+      updateAllBlogData(
+        {
+          ...blogData,
+          liked: !blogData.liked,
+        },
+        allBlogData,
+        setAllBlogData
+      );
+    } catch (e) {
+      //TODO: Handle error
+    }
   };
 
   return (
