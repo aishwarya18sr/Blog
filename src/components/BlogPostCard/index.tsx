@@ -3,35 +3,29 @@ import clap from "../../assets/icons/clapping.svg";
 import heartBlack from "../../assets/icons/heart-black.svg";
 import heartRed from "../../assets/icons/heart-red.svg";
 import { UPDATE_BLOG_DATA } from "../../constants/apiEndPoints";
-import { useBlogPost } from "../../context/BlogPostContext";
 import { BlogData } from "../../types";
-import {
-  getFormattedDateFromUtcDate,
-  updateAllBlogData,
-} from "../../utils/common";
+import { getFormattedDateFromUtcDate } from "../../utils/common";
 import makeRequest from "../../utils/makeRequest";
 import "./blogPostCard.css";
 
 interface BlogPostCardProp {
   blogData: BlogData;
+  setAllBlogData: (updatedBlogData: BlogData) => void;
 }
 
-const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
-  const { allBlogData, setAllBlogData } = useBlogPost();
-
+const BlogPostCard: React.FC<BlogPostCardProp> = ({
+  blogData,
+  setAllBlogData,
+}) => {
   const handleClap = async () => {
     try {
       await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
         data: { claps: blogData.claps + 1 },
       });
-      updateAllBlogData(
-        {
-          ...blogData,
-          claps: blogData.claps + 1,
-        },
-        allBlogData,
-        setAllBlogData
-      );
+      setAllBlogData({
+        ...blogData,
+        claps: blogData.claps + 1,
+      });
     } catch (e) {
       //TODO: Handle error
     }
@@ -42,14 +36,10 @@ const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
       await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
         data: { liked: !blogData.liked },
       });
-      updateAllBlogData(
-        {
-          ...blogData,
-          liked: !blogData.liked,
-        },
-        allBlogData,
-        setAllBlogData
-      );
+      setAllBlogData({
+        ...blogData,
+        liked: !blogData.liked,
+      });
     } catch (e) {
       //TODO: Handle error
     }
