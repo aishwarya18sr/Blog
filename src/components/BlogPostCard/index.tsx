@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import clap from "../../assets/icons/clapping.svg";
 import heartBlack from "../../assets/icons/heart-black.svg";
 import heartRed from "../../assets/icons/heart-red.svg";
 import { UPDATE_BLOG_DATA } from "../../constants/apiEndPoints";
-import { useBlogPost } from "../../context/BlogPostContext";
+import { BlogPostContext } from "../../context/BlogPostContext";
 import { BlogData } from "../../types";
 import {
   getFormattedDateFromUtcDate,
@@ -17,7 +17,7 @@ interface BlogPostCardProp {
 }
 
 const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
-  const { allBlogData, setAllBlogData } = useBlogPost();
+  const { allBlogData, setAllBlogData } = useContext(BlogPostContext);
 
   const handleClap = async () => {
     try {

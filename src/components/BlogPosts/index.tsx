@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GET_BLOG_DATA } from "../../constants/apiEndPoints";
-import { useBlogPost } from "../../context/BlogPostContext";
+import { BlogPostContext } from "../../context/BlogPostContext";
 import makeRequest from "../../utils/makeRequest";
 import BlogPostCard from "../BlogPostCard";
 import "./blogPosts.css";
 
 const BlogPosts = () => {
-  const { allBlogData, setAllBlogData } = useBlogPost();
+  const { allBlogData, setAllBlogData } = useContext(BlogPostContext);
   const navigate = useNavigate();
 
   useEffect(() => {

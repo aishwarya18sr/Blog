@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { BlogData, BlogPostContextType } from "../types";
 
 export const BlogPostContext = createContext({} as BlogPostContextType);
@@ -22,12 +22,4 @@ export const BlogPostProvider: React.FC<BlogPostProviderProps> = ({
       {children}
     </BlogPostContext.Provider>
   );
-};
-
-export const useBlogPost = () => {
-  const context = useContext(BlogPostContext);
-  if (context === undefined) {
-    throw new Error("BlogPost should be used inside BlogPostProvider");
-  }
-  return context;
 };
