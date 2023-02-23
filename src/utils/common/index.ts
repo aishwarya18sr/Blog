@@ -35,7 +35,7 @@ export const getBlogIndexById = (
 export const updateAllBlogData = (
   updatedBlogData: BlogData,
   allBlogData: BlogData[],
-  setAllBlogData: Dispatch<SetStateAction<BlogData[]>>
+  setAllBlogData: Dispatch<SetStateAction<BlogData[] | null>>
 ) => {
   const blogDataIndex = getBlogIndexById(allBlogData, updatedBlogData.id);
   setAllBlogData([

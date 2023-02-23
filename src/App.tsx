@@ -8,13 +8,18 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <BlogPostProvider>
-          <Routes>
-            <Route path={HOME_ROUTE} element={<Home />} />
-            <Route path={`${ERROR_ROUTE}/:errorCode?`} element={<Error />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BlogPostProvider>
+        <Routes>
+          <Route
+            path={HOME_ROUTE}
+            element={
+              <BlogPostProvider>
+                <Home />
+              </BlogPostProvider>
+            }
+          />
+          <Route path={`${ERROR_ROUTE}/:errorCode?`} element={<Error />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );

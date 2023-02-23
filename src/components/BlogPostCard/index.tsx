@@ -20,38 +20,42 @@ const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
   const { allBlogData, setAllBlogData } = useContext(BlogPostContext);
 
   const handleClap = async () => {
-    try {
-      await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
-        data: { claps: blogData.claps + 1 },
-      });
-      updateAllBlogData(
-        {
-          ...blogData,
-          claps: blogData.claps + 1,
-        },
-        allBlogData,
-        setAllBlogData
-      );
-    } catch (e) {
-      //TODO: Handle error
+    if (allBlogData) {
+      try {
+        await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
+          data: { claps: blogData.claps + 1 },
+        });
+        updateAllBlogData(
+          {
+            ...blogData,
+            claps: blogData.claps + 1,
+          },
+          allBlogData,
+          setAllBlogData
+        );
+      } catch (e) {
+        //TODO: Handle error
+      }
     }
   };
 
   const handleLike = async () => {
-    try {
-      await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
-        data: { liked: !blogData.liked },
-      });
-      updateAllBlogData(
-        {
-          ...blogData,
-          liked: !blogData.liked,
-        },
-        allBlogData,
-        setAllBlogData
-      );
-    } catch (e) {
-      //TODO: Handle error
+    if (allBlogData) {
+      try {
+        await makeRequest(UPDATE_BLOG_DATA(blogData.id), {
+          data: { liked: !blogData.liked },
+        });
+        updateAllBlogData(
+          {
+            ...blogData,
+            liked: !blogData.liked,
+          },
+          allBlogData,
+          setAllBlogData
+        );
+      } catch (e) {
+        //TODO: Handle error
+      }
     }
   };
 
@@ -71,7 +75,7 @@ const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
         <div className="post-description">{blogData.description}</div>
       </div>
       <div className="post-engagements post-padding">
-        <div className="clap" onClick={handleClap}>
+        <div className="clap" onClick={handleClap} data-testid="clap-icon">
           <div className="clap-icon">
             <img src={clap} alt="clap" />
           </div>

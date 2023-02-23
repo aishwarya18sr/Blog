@@ -10,7 +10,7 @@ interface BlogPostProviderProps {
 export const BlogPostProvider: React.FC<BlogPostProviderProps> = ({
   children,
 }) => {
-  const [allBlogData, setAllBlogData] = useState<BlogData[]>([]);
+  const [allBlogData, setAllBlogData] = useState<BlogData[] | null>(null);
 
   return (
     <BlogPostContext.Provider
