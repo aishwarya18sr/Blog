@@ -56,7 +56,7 @@ const BlogPostCard: React.FC<BlogPostCardProp> = ({ blogData }) => {
   };
 
   return (
-    <div className="post">
+    <div className="post" data-testid="blog-post">
       <div className="post-image">
         <img src={blogData.image} alt="" />
       </div>
