@@ -1,5 +1,5 @@
 import { BlogData } from "./../../types/blogPosts";
-import { monthNames } from "../../constants/postCard";
+import { MONTH_NAMES } from "../../constants/postCard";
 import { Dispatch, SetStateAction } from "react";
 
 export const getSuffixOfDay = (dayNumber: number) => {
@@ -19,7 +19,7 @@ export const getSuffixOfDay = (dayNumber: number) => {
 export const getFormattedDateFromUtcDate = (utcDate: string) => {
   const date = new Date(utcDate);
   return `${date.getDate()}${getSuffixOfDay(date.getDate())}
-      ${monthNames[date.getMonth()]}, 
+      ${MONTH_NAMES[date.getMonth()]}, 
       ${date.getFullYear()}`;
 };
 
